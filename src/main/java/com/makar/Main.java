@@ -1,12 +1,14 @@
 package com.makar;
 
-interface Notifier {
+interface INotifier {
     void connect();
+
     void send(String message);
+
     void disconnect();
 }
 
-class EmailNotifier implements Notifier {
+class EmailNotifier implements INotifier {
     public void connect() {
         System.out.println("Connecting to email server...");
     }
@@ -23,7 +25,7 @@ class EmailNotifier implements Notifier {
     }
 }
 
-class WebhookNotifier implements Notifier {
+class WebhookNotifier implements INotifier {
     public void connect() {
         throw new UnsupportedOperationException("WebhookNotifier does not support connect()");
     }
@@ -38,7 +40,7 @@ class WebhookNotifier implements Notifier {
 }
 
 class NotificationSender {
-    public void sendNotification(Notifier notifier, String message) {
+    public void sendNotification(INotifier notifier, String message) {
         if (notifier instanceof EmailNotifier) {
             notifier.connect();
             notifier.send(message);
