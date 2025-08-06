@@ -23,8 +23,8 @@ class SMTPConnection implements IEmailConnection {
         System.out.println("Connecting to email server...");
     }
 
-    public void send(String message) {
-        if (message.length() > 1000) {
+    public void send(String message) throws IllegalArgumentException {
+        if (message.length() > 160) {
             throw new IllegalArgumentException("Message too large");
         }
         System.out.println("Sending EMAIL: " + message);
